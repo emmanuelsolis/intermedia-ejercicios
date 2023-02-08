@@ -1,37 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ordenamiento de Matriz de 10 fix</title>
-</head>
-<body>
-    <?php
-     //$fix es el array que nos gustaría reordenar
-     $fix = array(3, 4, 1, 2, 10, 9, 8, 7, 5);
-    //  sort($fix);
-    //  print_r($fix);
-     $minor = 0;
-        function ordenar($fix){
-            for($i=0; $i<count($fix); $i++){
-                //comparamos con el bucle anidado dos valortes consecutivos
-                for($j=0; $j<count($fix); $j++){
-                    if($fix[$j] > $fix[$j+1]){
-                        $minor=$fix[$j+1];
-                        $fix[$j+1]=$fix[$j];
-                        $fix[$j]=$minor;
-                    }
-                }
-            }
-            return $fix;
-        };
 
-        $fixed = ordenar($fix);
+<form action="<?php $_PHP_SELF ?>" method="post">
+      <?php for ($i = 0; $i < 10; $i++) { ?>
+        <label for="number_<?php echo $i; ?>">Ingrese el número <?php echo ($i + 1); ?>:</label>
+        <input type="text" name="numbers[]" size="2" id="number_<?php echo $i; ?>">
+        <br>
+      <?php } ?>
+      <input type="submit" value="Enviar">
+    </form>
 
-        for($i=0; $i<count($fixed); $i++){
-            echo $fixed[$i];
-        }
-    ?>
-</body>
-</html>
+<?php
+  if (isset($_POST['numbers'])) {
+    $numbers = $_POST['numbers'];
+    sort($numbers);
+    echo "Los números ingresados y ordenados son: \n";
+    for ($i = 0; $i < count($numbers); $i++) {
+      echo $numbers[$i] . "\n";
+    }
+  } else {
+    echo "No se han ingresado números.";
+  }
+?>
+
+
+<!-- <?php
+//   $fix = array(3, 4, 1, 2, 10, 9, 8, 7, 5);
+//   sort($fix);
+//   for($i = 0; $i < count($fix); $i++) {
+//     echo $fix[$i] . "\n";
+//   }
+?> -->
